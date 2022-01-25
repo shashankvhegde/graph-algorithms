@@ -4,13 +4,12 @@ using namespace std;
 template <class T>
 class IndexedPriorityQueue{
 	
-
 public:
 	class Entry{
 	public:
 		int key;
 		T val;
-		
+
 		Entry(int key, T val){
 			this->key = key;
 			this->val = val;
@@ -51,7 +50,7 @@ public:
 	void pop(){
 		int k = nodes[0].key;
 		key_to_position.erase(nodes[0].key);
-        exchange(0, size-1);
+        	exchange(0, size-1);
 		size--;
 		int pos = sink(0);
 		nodes.pop_back();
@@ -71,18 +70,18 @@ public:
 		nodes[key_to_position[id]].update(new_val);
 		swim(key_to_position[id]);
 	}
-    void print(){
-        for(auto node: nodes){
-            cout << node.key << " " << node.val << endl;
-        }
-        for(auto p: key_to_position){
-            cout << p.first << "->" << p.second << endl;
-        }
-        cout << endl;
-    }
-    bool empty(){
-        return (size == 0);
-    }
+    	void print(){
+		for(auto node: nodes){
+		    cout << node.key << " " << node.val << endl;
+		}
+		for(auto p: key_to_position){
+		    cout << p.first << "->" << p.second << endl;
+		}
+		cout << endl;
+	}
+	bool empty(){
+		return (size == 0);
+	}
 private:
 	int size;
 	vector<Entry> nodes; // Entry key will be the key users provide. For example; vertex number in a graph.
@@ -93,18 +92,19 @@ private:
 		return (pos == 0) ? pos : (pos-1)/2;
 	}
 	inline int left(int pos){
-        return (2*pos + 1);
+        	return (2*pos + 1);
 	}
 	inline int right(int pos){
-        return (2*pos + 2);
+		return (2*pos + 2);
 	}
 	
-    void exchange(int a, int b){
-        if(a == b) return;
-        key_to_position[nodes[a].key] = b;
-        key_to_position[nodes[b].key] = a;
-        swap(nodes[a], nodes[b]);
-    }
+	void exchange(int a, int b){
+		if(a == b) return;
+		key_to_position[nodes[a].key] = b;
+		key_to_position[nodes[b].key] = a;
+		swap(nodes[a], nodes[b]);
+	}
+	
 	int sink(int pos){
 		bool stop = false;
 
@@ -112,26 +112,25 @@ private:
 			int l = left(pos);
 			int r = right(pos);
 			
-            int min_index = l;
-            if(l < size-1 and nodes[l].val > nodes[r].val) { 
-                min_index = r;
-            } 
-            
-            if(nodes[min_index].val < nodes[pos].val) {
-                exchange(min_index, pos);
-            }
-            else {
-                stop = true; 
-            }
-            
-            pos = min_index;
+            		int min_index = l;
+			if(l < size-1 and nodes[l].val > nodes[r].val) { 
+				min_index = r;
+			} 
+
+			if(nodes[min_index].val < nodes[pos].val) {
+				exchange(min_index, pos);
+			}
+			else {
+				stop = true; 
+			}
+			pos = min_index;
 		}
-		
 		return pos;
 	}
+	
 	int swim(int pos){
 		while(parent(pos) != pos and nodes[parent(pos)].val > nodes[pos].val){
-            exchange(pos, parent(pos));
+            		exchange(pos, parent(pos));
 			pos = parent(pos);
 		}
 		return pos;
