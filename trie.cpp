@@ -42,7 +42,7 @@ private:
         return found;
     }
     bool remove(const string& word, int index){
-		bool last_word = false;    
+	bool last_word = false;    
     	if(index == word.length()){
     		if(terminal){
     			terminal = false;
@@ -57,13 +57,13 @@ private:
     			}
     		}
     	}
-	    bool empty = true;
-		for(int i = 0;i<26 and empty;i++){
-			if(children[i] != nullptr){
-				empty = false;
-			}
+	bool empty = true;
+	for(int i = 0;i<26 and empty;i++){
+		if(children[i] != nullptr){
+			empty = false;
 		}
-		last_word = empty;
+	}
+	last_word = empty;
     	return last_word;
     }
     
@@ -90,8 +90,8 @@ public:
     }
 	
     void remove(string word){
-		remove(word, 0);
-	}
+	remove(word, 0);
+    }
 };
 
 /**
