@@ -121,6 +121,7 @@ private:
 				exchange(min_index, pos);
 			}
 			else {
+				min_index = pos;
 				stop = true; 
 			}
 			pos = min_index;
