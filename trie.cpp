@@ -66,6 +66,32 @@ private:
 	last_word = empty;
     	return last_word;
     }
+    void all_strings(string current, vector<string>& ans){
+        
+        if(ans.size() == 3){
+            return;
+        }
+        if(terminal){
+            ans.push_back(current);
+        }
+        
+        for(int i = 0;i<26;i++){
+            if(children[i] == nullptr) continue;
+            current.push_back((char) ('a'+i));
+            children[i]->all_strings(current, ans);
+            current.pop_back();
+        }
+    }
+    vector<string> strings_starting_with(string& prefix, int index){
+        vector<string> ans;
+        if(index == prefix.length()){
+            this->all_strings(prefix, ans);
+        }
+        else if(children[prefix[index]-'a'] != nullptr){
+            ans = children[prefix[index]-'a']->strings_starting_with(prefix, index+1);
+        }
+        return ans;
+    }
     
 public:
     Trie() {
@@ -87,6 +113,10 @@ public:
     
     bool startsWith(string prefix) {
         return starts_with(prefix, 0);
+    }
+
+    vector<string> strings_starting_with(string& prefix){
+        return strings_starting_with(prefix, 0);
     }
 	
     void remove(string word){
