@@ -68,7 +68,7 @@ private:
     }
     void all_strings(string current, vector<string>& ans){
         
-        if(ans.size() == 3){
+        if(ans.size() == 3){ // limit of 3 results
             return;
         }
         if(terminal){
