@@ -47,7 +47,7 @@ public:
         rev_post_order.push(v);
         
     }
-    stack<int> reverse_post_order(){
+    stack<int> post_order(){
         
         vector<bool> visited(V, false);
         stack<int> ans;
@@ -77,7 +77,7 @@ class Solution
     int kosaraju(int V, vector<int> adj[])
     {
         Digraph graph(V, adj);
-        stack<int> rev_po = graph.reverse().reverse_post_order();
+        stack<int> rev_po = graph.reverse().post_order();
         
         vector<bool> visited(V, false);
         
